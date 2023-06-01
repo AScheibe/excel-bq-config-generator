@@ -1,0 +1,1 @@
+# excel-bq-config-generator
