@@ -1,0 +1,5 @@
+Generator for GCP Big Query config file given an excel file
+
+- Assumes definitions table exists (relatively standard assumption)
+- Assumes excel file is converted to csv with comma delims
+- Currently much more tailored for immediate personal use case
