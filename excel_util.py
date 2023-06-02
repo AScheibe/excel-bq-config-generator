@@ -1,8 +1,7 @@
 import pandas as pd
 import json
 
-
-def run() -> str:
+def run_generator() -> str:
     path = input("Enter Excel File Path: ")
 
     table_name = input("Enter data table name: ")
@@ -59,6 +58,7 @@ def generate_config (path, table_name, def_table,
         "sourceFormat": "CSV",
         "tableName": table_name,
         "writeDisposition": "WRITE_TRUNCATE",
+        "skipRows": skip_rows,
         "schema": schema
     }
 
@@ -74,4 +74,11 @@ def generate_config (path, table_name, def_table,
 
     return json.dumps(wrapper_list, indent=4)
     
+
+def convert_xlsx_csv(config_file, data_path, dest_path):
+    config = json.loads(config_file)
+
+    for c in config:
+        data = pd.read_excel(data_path, sheet_name=c["load"], skiprows=c["load"]["skipRows"])
+        data.to_csv(f'dest_path/{c["load"]["tableName"]}.csv')
 
